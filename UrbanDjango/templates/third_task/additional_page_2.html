@@ -1,0 +1,25 @@
+{% extends 'third_task/menu.html' %}
+
+{% block pagename %}
+    <h1>Главная страница</h1>
+{% endblock %}
+
+
+{% block menu %}
+    <h2><a href="#">Главная</a></h2>
+    <h2><a href="http://127.0.0.1:8000/page2/">Новые автомобили</a></h2>
+    <h2><a href="http://127.0.0.1:8000/page3/">Подержанные автомобили</a></h2>
+{% endblock %}
+
+{% block content%}
+    <p>
+        <h1>{{title}}</h1>
+    <ul>
+        {% for i in list_car2%}
+            <li>{{ i }}<button>Перейти</button></li>
+        {% endfor %}
+    </ul>
+
+   <button> <h2><a href="{% url 'button' %}">На главную</a></h2></button>
+    </p>
+{% endblock %}

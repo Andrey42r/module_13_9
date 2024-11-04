@@ -1,0 +1,15 @@
+{% extends 'third_task/menu.html' %}
+
+{% block pagename %}
+    <h1>Главная страница</h1>
+{% endblock %}
+
+
+{% block menu %}
+    <h2><a href="#">Главная</a></h2>
+    <h2><a href="http://127.0.0.1:8000/page2/">Новые автомобили</a></h2>
+    <h2><a href="http://127.0.0.1:8000/page3/">Подержанные автомобили</a></h2>
+    <h2><a href="http://127.0.0.1:8000/bin/">Корзина</a></h2>
+    <button><h1><a href="http://127.0.0.1:8000/game/">Игры</a></h1></button>
+    <button><h1><a href="{% url 'go_reg' %}">Регистрация</a></h1></button>
+{% endblock %}
