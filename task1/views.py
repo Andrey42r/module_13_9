@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from .forms import UserRegister
-from .models import *
+from .models import Buyer, Game
 
 
 # Create your views here.
@@ -12,9 +12,6 @@ def menu_page(request):
 
 def main_page(request):
     return render(request, 'third_task/main_page.html')
-
-def go_reg(request):
-    return render(request, 'fifth_task/registration_page.html')
 
 def bin_page(request):
     cont = 'Продолжить покупки'
@@ -60,17 +57,16 @@ def collect_of_games(request):
 def sign_up_by_django(request):
     if request.method == "POST":
         form = UserRegister(request.POST)
-        users = Buyer.objects.all()
-        info = {'form': form}
+        info = {'form':form}
         if form.is_valid():
+            users = Buyer.objects.all()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             repeat_password = form.cleaned_data['repeat_password']
             age = form.cleaned_data['age']
 
             if username not in users and password == repeat_password and age >= '18':
-                users.append(username)
-                print(f'Updated names: {users}')
+                Buyer.objects.create(name=username, age=age, balance=0)
                 return HttpResponse(f'Приветствуем, {username}!')
 
             elif password != repeat_password:
@@ -97,17 +93,16 @@ def sign_up_by_django(request):
 def sign_up_by_html(request):
     if request.method == "POST":
         form = UserRegister(request.POST)
-        users = Buyer.objects.all()
-        info = {'form': form}
+        info = {'form':form}
         if form.is_valid():
+            buyers = Buyer.objects.all()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             repeat_password = form.cleaned_data['repeat_password']
             age = form.cleaned_data['age']
 
-            if username not in users and password == repeat_password and age >= '18':
-                users.append(username)
-                print(f'Updated names: {users}')
+            if username not in buyers and password == repeat_password and age >= '18':
+                Buyer.objects.create(name=username, age=age, balance=0)
                 return HttpResponse(f'Приветствуем, {username}!')
 
             elif password != repeat_password:
@@ -120,7 +115,7 @@ def sign_up_by_html(request):
                 print(f'Error: {info["error"]}')
                 return HttpResponse(info['error'])
 
-            elif username in users:
+            elif username in buyers:
                 info['error'] = 'Пользователь уже существует'
                 print(f'Error: {info["error"]}')
                 return HttpResponse(info['error'])
@@ -129,4 +124,3 @@ def sign_up_by_html(request):
         form = UserRegister()
         info = {'form': form}
     return render(request, 'fifth_task/registration_page.html', context=info)
-

@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from task1.views import (main_page, bin_page, page_2, page_3, button, sign_up_by_html, sign_up_by_django,
-                         collect_of_games, menu_page, collect_of_games, go_reg)
+                         collect_of_games, menu_page, collect_of_games)
 from django.views.generic import TemplateView
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +33,5 @@ urlpatterns = [
     path('button', button, name='button'),
     path('django_sign_up/', sign_up_by_django, name='django_sign_up'),
     path('registration/', sign_up_by_html, name='registration'),
-    path('go_reg/', go_reg, name='go_reg'),
 ]
+
